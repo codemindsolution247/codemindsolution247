@@ -1,1 +1,1206 @@
 
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CodeMind Solution — Software Agency</title>
+  <meta name="description" content="CodeMind Solution — Professional web, mobile, desktop development, final year projects and software installation services."/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue:      #2563eb;
+      --blue-dark: #1d4ed8;
+      --navy:      #0f172a;
+      --slate:     #475569;
+      --light:     #f8fafc;
+      --border:    #e2e8f0;
+      --white:     #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--navy);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--light); }
+    ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
+
+    /* ══════════════════════════════════════
+       NAVBAR
+    ══════════════════════════════════════ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px;
+    }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 38px; height: 38px; background: var(--blue);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-logo-icon i { color: white; font-size: 1.1rem; }
+    .nav-logo-text { font-size: 1.15rem; font-weight: 800; color: var(--navy); }
+    .nav-logo-text span { color: var(--blue); }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.875rem; font-weight: 500; color: var(--slate);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--blue); }
+
+    .nav-cta {
+      background: var(--blue); color: white !important;
+      padding: 9px 22px; border-radius: 9px;
+      font-weight: 600 !important; font-size: 0.875rem;
+      text-decoration: none; transition: background 0.2s, transform 0.2s !important;
+      display: inline-block;
+    }
+    .nav-cta:hover { background: var(--blue-dark) !important; transform: translateY(-1px); }
+
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--navy); border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .mobile-menu {
+      display: none; flex-direction: column; gap: 4px;
+      background: white; border-top: 1px solid var(--border);
+      padding: 16px 24px 20px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 0.95rem; font-weight: 500; color: var(--slate);
+      text-decoration: none; padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+
+    /* ══════════════════════════════════════
+       HERO
+    ══════════════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #1d4ed8 100%);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 100px 24px 60px;
+      position: relative; overflow: hidden;
+    }
+
+    /* Animated background blobs */
+    .hero::before {
+      content: '';
+      position: absolute; top: -200px; right: -200px;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: rgba(37,99,235,0.15);
+      animation: float 8s ease-in-out infinite;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -150px; left: -150px;
+      width: 400px; height: 400px; border-radius: 50%;
+      background: rgba(99,102,241,0.1);
+      animation: float 10s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(30px, -30px) scale(1.05); }
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 9999px; padding: 8px 18px;
+      font-size: 0.825rem; font-weight: 500; color: #bfdbfe;
+      margin-bottom: 28px;
+    }
+    .hero-badge i { color: #fbbf24; }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900; line-height: 1.1;
+      color: white; margin-bottom: 12px; letter-spacing: -0.02em;
+    }
+    .hero h1 span { color: #60a5fa; }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      color: #93c5fd; font-weight: 400; margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.05rem; color: #bfdbfe;
+      max-width: 580px; margin: 0 auto 40px;
+      line-height: 1.8;
+    }
+
+    .hero-buttons {
+      display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+      margin-bottom: 60px;
+    }
+
+    .btn-primary {
+      background: white; color: var(--blue);
+      font-weight: 700; font-size: 0.95rem;
+      padding: 14px 32px; border-radius: 12px;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.25); }
+
+    .btn-secondary {
+      border: 2px solid rgba(255,255,255,0.35); color: white;
+      font-weight: 600; font-size: 0.95rem;
+      padding: 14px 32px; border-radius: 12px;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+    /* Stats row */
+    .hero-stats {
+      display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-num { font-size: 1.75rem; font-weight: 800; color: white; }
+    .hero-stat-label { font-size: 0.78rem; color: #93c5fd; font-weight: 500; }
+
+    /* scroll indicator */
+    .scroll-down {
+      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+      color: rgba(255,255,255,0.4); font-size: 1.4rem;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ══════════════════════════════════════
+       SECTION COMMON
+    ══════════════════════════════════════ */
+    section { padding: 96px 24px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    .section-label {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #eff6ff; color: var(--blue);
+      font-size: 0.78rem; font-weight: 700;
+      padding: 5px 14px; border-radius: 9999px;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 800; color: var(--navy);
+      line-height: 1.2; margin-bottom: 12px;
+    }
+    .section-sub {
+      font-size: 1rem; color: var(--slate);
+      max-width: 520px; line-height: 1.7;
+    }
+    .section-header { margin-bottom: 56px; }
+    .section-header.center { text-align: center; }
+    .section-header.center .section-sub { margin: 0 auto; }
+
+    /* ══════════════════════════════════════
+       SERVICES
+    ══════════════════════════════════════ */
+    #services { background: var(--light); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .service-card {
+      background: white; border-radius: 20px;
+      border: 1px solid var(--border);
+      padding: 32px 28px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--blue), #6366f1);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(0,0,0,0.1); }
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-icon {
+      width: 56px; height: 56px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 20px;
+    }
+
+    .service-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .service-card p  { font-size: 0.875rem; color: var(--slate); line-height: 1.7; margin-bottom: 16px; }
+
+    .service-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .service-tag {
+      background: var(--light); color: var(--slate);
+      font-size: 0.72rem; font-weight: 600;
+      padding: 3px 10px; border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    /* ══════════════════════════════════════
+       WHY US
+    ══════════════════════════════════════ */
+    #why { background: white; }
+
+    .why-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 48px; align-items: center;
+    }
+
+    .why-visual {
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      border-radius: 24px; padding: 40px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+
+    .why-stat-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px; padding: 20px 16px; text-align: center;
+    }
+    .why-stat-card .num { font-size: 2rem; font-weight: 800; color: white; }
+    .why-stat-card .lbl { font-size: 0.75rem; color: #93c5fd; font-weight: 500; margin-top: 4px; }
+
+    .why-features { display: flex; flex-direction: column; gap: 20px; }
+
+    .why-feature {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 20px; border-radius: 14px;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .why-feature:hover { border-color: #bfdbfe; box-shadow: 0 4px 16px rgba(37,99,235,0.08); }
+
+    .why-feature-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: #eff6ff; display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .why-feature h4 { font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .why-feature p  { font-size: 0.825rem; color: var(--slate); line-height: 1.6; }
+
+    /* ══════════════════════════════════════
+       TECH STACK
+    ══════════════════════════════════════ */
+    #tech { background: var(--light); }
+
+    .tech-grid {
+      display: flex; flex-wrap: wrap;
+      gap: 12px; justify-content: center;
+    }
+
+    .tech-pill {
+      display: flex; align-items: center; gap: 8px;
+      background: white; border: 1px solid var(--border);
+      border-radius: 12px; padding: 10px 18px;
+      font-size: 0.875rem; font-weight: 600; color: var(--navy);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .tech-pill:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.08); }
+    .tech-pill img { width: 20px; height: 20px; object-fit: contain; }
+
+    /* ══════════════════════════════════════
+       PROJECTS
+    ══════════════════════════════════════ */
+    #projects { background: white; }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .project-card {
+      background: var(--light); border-radius: 20px;
+      border: 1px solid var(--border); overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .project-card:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(0,0,0,0.1); }
+
+    .project-banner {
+      height: 140px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem; position: relative; overflow: hidden;
+    }
+
+    .project-body { padding: 24px; }
+    .project-body h3 { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .project-body p  { font-size: 0.825rem; color: var(--slate); margin-bottom: 14px; line-height: 1.6; }
+
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .project-tag {
+      background: white; color: var(--blue);
+      font-size: 0.72rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 6px;
+      border: 1px solid #bfdbfe;
+    }
+
+    /* ══════════════════════════════════════
+       PRICING
+    ══════════════════════════════════════ */
+    #pricing { background: var(--light); }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px; align-items: start;
+    }
+
+    .pricing-card {
+      background: white; border-radius: 20px;
+      border: 1px solid var(--border);
+      padding: 32px 28px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      position: relative; transition: transform 0.3s;
+    }
+    .pricing-card:hover { transform: translateY(-4px); }
+    .pricing-card.featured {
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      border-color: transparent;
+      box-shadow: 0 12px 36px rgba(37,99,235,0.25);
+      transform: scale(1.03);
+    }
+    .pricing-card.featured:hover { transform: scale(1.03) translateY(-4px); }
+
+    .pricing-badge {
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: #fbbf24; color: #92400e;
+      font-size: 0.72rem; font-weight: 800;
+      padding: 4px 14px; border-radius: 9999px;
+      white-space: nowrap;
+    }
+
+    .pricing-icon { font-size: 2rem; margin-bottom: 14px; }
+    .pricing-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+    .pricing-card.featured h3 { color: white; }
+
+    .pricing-desc { font-size: 0.825rem; color: var(--slate); margin-bottom: 20px; }
+    .pricing-card.featured .pricing-desc { color: #93c5fd; }
+
+    .pricing-price {
+      font-size: 1.5rem; font-weight: 800; color: var(--blue); margin-bottom: 20px;
+    }
+    .pricing-card.featured .pricing-price { color: #60a5fa; }
+    .pricing-price span { font-size: 0.875rem; font-weight: 400; color: var(--slate); }
+    .pricing-card.featured .pricing-price span { color: #93c5fd; }
+
+    .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .pricing-features li {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.85rem; color: var(--slate);
+    }
+    .pricing-card.featured .pricing-features li { color: #bfdbfe; }
+    .pricing-features li i { color: #22c55e; font-size: 0.85rem; flex-shrink: 0; }
+
+    .pricing-btn {
+      display: block; text-align: center;
+      background: var(--light); color: var(--blue);
+      font-weight: 700; font-size: 0.875rem;
+      padding: 12px; border-radius: 10px;
+      text-decoration: none; border: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    .pricing-btn:hover { background: #eff6ff; }
+    .pricing-card.featured .pricing-btn {
+      background: var(--blue); color: white; border-color: transparent;
+    }
+    .pricing-card.featured .pricing-btn:hover { background: var(--blue-dark); }
+
+    /* ══════════════════════════════════════
+       CONTACT
+    ══════════════════════════════════════ */
+    #contact { background: white; }
+
+    .contact-wrapper {
+      display: grid; grid-template-columns: 1fr 1.2fr;
+      gap: 48px; align-items: start;
+    }
+
+    .contact-info h2 { font-size: 2rem; font-weight: 800; color: var(--navy); margin-bottom: 12px; }
+    .contact-info p  { font-size: 0.95rem; color: var(--slate); line-height: 1.7; margin-bottom: 32px; }
+
+    .contact-methods { display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px; }
+    .contact-method {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 20px; background: var(--light);
+      border-radius: 14px; border: 1px solid var(--border);
+      text-decoration: none; transition: border-color 0.2s;
+    }
+    .contact-method:hover { border-color: #bfdbfe; }
+    .contact-method-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .contact-method-info .label { font-size: 0.72rem; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.06em; }
+    .contact-method-info .value { font-size: 0.9rem; font-weight: 600; color: var(--navy); }
+
+    /* Social links */
+    .social-links { display: flex; gap: 10px; flex-wrap: wrap; }
+    .social-link {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 18px; border-radius: 10px;
+      font-size: 0.825rem; font-weight: 700;
+      text-decoration: none; transition: transform 0.2s, opacity 0.2s;
+      border: none;
+    }
+    .social-link:hover { transform: translateY(-2px); opacity: 0.9; }
+    .social-link.linkedin  { background: #0077b5; color: white; }
+    .social-link.facebook  { background: #1877f2; color: white; }
+    .social-link.fiverr    { background: #1dbf73; color: white; }
+    .social-link.upwork    { background: #6fda44; color: #1a1a1a; }
+
+    /* Contact Form */
+    .contact-form {
+      background: var(--light); border-radius: 24px;
+      border: 1px solid var(--border); padding: 36px;
+    }
+    .contact-form h3 { font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 24px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+    .form-group label { font-size: 0.78rem; font-weight: 700; color: var(--slate); text-transform: uppercase; letter-spacing: 0.05em; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: white; border: 1px solid var(--border);
+      border-radius: 10px; padding: 11px 14px;
+      font-size: 0.875rem; color: var(--navy);
+      font-family: 'Inter', sans-serif; outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+    }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    .form-submit {
+      width: 100%; padding: 13px;
+      background: var(--blue); color: white;
+      font-size: 0.95rem; font-weight: 700;
+      border: none; border-radius: 11px;
+      cursor: pointer; font-family: 'Inter', sans-serif;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .form-submit:hover { background: var(--blue-dark); transform: translateY(-1px); }
+
+    /* ══════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════ */
+    footer {
+      background: var(--navy); color: #94a3b8;
+      padding: 56px 24px 24px;
+    }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px; margin-bottom: 48px;
+    }
+
+    .footer-brand p { font-size: 0.875rem; line-height: 1.7; color: #64748b; margin-top: 12px; max-width: 260px; }
+    .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+    .footer-logo-icon {
+      width: 34px; height: 34px; background: var(--blue);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    }
+    .footer-logo-icon i { color: white; font-size: 1rem; }
+    .footer-logo span { font-size: 1.1rem; font-weight: 800; color: white; }
+
+    .footer-col h4 { font-size: 0.825rem; font-weight: 700; color: white; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .footer-col a  { display: block; font-size: 0.85rem; color: #64748b; text-decoration: none; margin-bottom: 10px; transition: color 0.2s; }
+    .footer-col a:hover { color: #93c5fd; }
+
+    .footer-bottom {
+      border-top: 1px solid #1e293b; padding-top: 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+      font-size: 0.8rem; color: #475569;
+    }
+
+    /* ══════════════════════════════════════
+       BACK TO TOP
+    ══════════════════════════════════════ */
+    #back-top {
+      position: fixed; bottom: 28px; right: 28px; z-index: 999;
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--blue); color: white; border: none;
+      font-size: 1rem; cursor: pointer;
+      display: none; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(37,99,235,0.4);
+      transition: transform 0.2s;
+    }
+    #back-top:hover { transform: translateY(-3px); }
+    #back-top.show { display: flex; }
+
+    /* ══════════════════════════════════════
+       ANIMATIONS
+    ══════════════════════════════════════ */
+    .fade-in {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .why-grid      { grid-template-columns: 1fr; }
+      .contact-wrapper { grid-template-columns: 1fr; }
+      .footer-grid   { grid-template-columns: 1fr 1fr; }
+      .why-visual    { order: -1; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links     { display: none; }
+      .hamburger     { display: flex; }
+      .form-row      { grid-template-columns: 1fr; }
+      .footer-grid   { grid-template-columns: 1fr; }
+      .hero-buttons  { flex-direction: column; align-items: center; }
+      .pricing-card.featured { transform: scale(1); }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ══════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">
+      <div class="nav-logo-icon"><i class="fas fa-brain"></i></div>
+      <div class="nav-logo-text">Code<span>Mind</span> Solution</div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#tech">Tech</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#contact" class="nav-cta">Get Started</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#services"  onclick="closeMobile()">Services</a>
+    <a href="#why"       onclick="closeMobile()">Why Us</a>
+    <a href="#tech"      onclick="closeMobile()">Tech Stack</a>
+    <a href="#projects"  onclick="closeMobile()">Projects</a>
+    <a href="#pricing"   onclick="closeMobile()">Pricing</a>
+    <a href="#contact"   onclick="closeMobile()">Contact Us</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-badge"><i class="fas fa-bolt"></i> Pakistan's Next-Gen Software Team</div>
+    <h1>We Build <span>Digital</span><br/>Solutions That Matter</h1>
+    <p class="hero-tagline">Web · Mobile · Desktop · AI Systems · Final Year Projects</p>
+    <p>From a business website to a full AI-powered application — CodeMind Solution delivers clean, modern, and scalable software tailored to your needs.</p>
+    <div class="hero-buttons">
+      <a href="#services" class="btn-primary"><i class="fas fa-rocket"></i> Explore Services</a>
+      <a href="#contact"  class="btn-secondary"><i class="fas fa-envelope"></i> Get Free Quote</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">10+</div>
+        <div class="hero-stat-label">Projects Built</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">3</div>
+        <div class="hero-stat-label">Expert Developers</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">100%</div>
+        <div class="hero-stat-label">Client Satisfaction</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">24h</div>
+        <div class="hero-stat-label">Response Time</div>
+      </div>
+    </div>
+  </div>
+  <a href="#services" class="scroll-down"><i class="fas fa-chevron-down"></i></a>
+</section>
+
+<!-- ══════════════════════════════════════
+     SERVICES
+══════════════════════════════════════ -->
+<section id="services">
+  <div class="container">
+    <div class="section-header center fade-in">
+      <div class="section-label"><i class="fas fa-cog"></i> What We Do</div>
+      <h2 class="section-title">Our Core Services</h2>
+      <p class="section-sub">Everything you need to take your idea from concept to a fully deployed, production-ready product.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card fade-in">
+        <div class="service-icon" style="background:#eff6ff;">🌐</div>
+        <h3>Website Development</h3>
+        <p>Professional, responsive websites built with modern technologies. From simple landing pages to complex web applications.</p>
+        <div class="service-tags">
+          <span class="service-tag">React</span>
+          <span class="service-tag">Next.js</span>
+          <span class="service-tag">FastAPI</span>
+          <span class="service-tag">Node.js</span>
+          <span class="service-tag">E-commerce</span>
+        </div>
+      </div>
+
+      <div class="service-card fade-in">
+        <div class="service-icon" style="background:#f0fdf4;">📱</div>
+        <h3>App Development</h3>
+        <p>Cross-platform Android, iOS and Desktop applications with smooth UX, built using React Native, Flutter, or native technologies.</p>
+        <div class="service-tags">
+          <span class="service-tag">Android</span>
+          <span class="service-tag">iOS</span>
+          <span class="service-tag">Desktop</span>
+          <span class="service-tag">React Native</span>
+          <span class="service-tag">Flutter</span>
+        </div>
+      </div>
+
+      <div class="service-card fade-in">
+        <div class="service-icon" style="background:#fdf4ff;">🎓</div>
+        <h3>Final Year Projects</h3>
+        <p>Complete FYP solutions with documentation, presentation support, and deployment. All tech stacks — AI, web, mobile, embedded.</p>
+        <div class="service-tags">
+          <span class="service-tag">AI/ML</span>
+          <span class="service-tag">Deep Learning</span>
+          <span class="service-tag">Web Apps</span>
+          <span class="service-tag">Data Science</span>
+          <span class="service-tag">Full Docs</span>
+        </div>
+      </div>
+
+      <div class="service-card fade-in">
+        <div class="service-icon" style="background:#fff7ed;">💿</div>
+        <h3>Software Installation</h3>
+        <p>Professional installation and configuration of MS Office Pro, Adobe Creative Suite, and any other software you need — hassle-free.</p>
+        <div class="service-tags">
+          <span class="service-tag">MS Office Pro</span>
+          <span class="service-tag">Adobe Suite</span>
+          <span class="service-tag">Activation</span>
+          <span class="service-tag">Tech Support</span>
+        </div>
+      </div>
+
+      <div class="service-card fade-in">
+        <div class="service-icon" style="background:#f0f9ff;">🤖</div>
+        <h3>AI / ML Systems</h3>
+        <p>Custom AI-powered solutions — object detection, image classification, recommendation systems, NLP tools, and data analytics dashboards.</p>
+        <div class="service-tags">
+          <span class="service-tag">Computer Vision</span>
+          <span class="service-tag">YOLO</span>
+          <span class="service-tag">TensorFlow</span>
+          <span class="service-tag">OpenCV</span>
+        </div>
+      </div>
+
+      <div class="service-card fade-in">
+        <div class="service-icon" style="background:#fef2f2;">🔧</div>
+        <h3>API & Backend</h3>
+        <p>Scalable REST APIs, database design, authentication systems, and admin dashboards for any web or mobile application.</p>
+        <div class="service-tags">
+          <span class="service-tag">FastAPI</span>
+          <span class="service-tag">REST API</span>
+          <span class="service-tag">MongoDB</span>
+          <span class="service-tag">PostgreSQL</span>
+          <span class="service-tag">JWT Auth</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     WHY US
+══════════════════════════════════════ -->
+<section id="why">
+  <div class="container">
+    <div class="why-grid">
+      <div class="fade-in">
+        <div class="section-label"><i class="fas fa-star"></i> Why Choose Us</div>
+        <h2 class="section-title">Built by Developers,<br/>For Your Success</h2>
+        <p class="section-sub" style="margin-bottom:32px;">We're not just a service — we're your tech partners. Every project gets our full dedication, clean code, and on-time delivery.</p>
+        <div class="why-features">
+          <div class="why-feature">
+            <div class="why-feature-icon">⚡</div>
+            <div>
+              <h4>On-Time Delivery</h4>
+              <p>We respect your deadlines. Every milestone is tracked and delivered on schedule, every time.</p>
+            </div>
+          </div>
+          <div class="why-feature">
+            <div class="why-feature-icon">💎</div>
+            <div>
+              <h4>Clean, Quality Code</h4>
+              <p>Fully documented, maintainable codebase with best practices — not just something that barely works.</p>
+            </div>
+          </div>
+          <div class="why-feature">
+            <div class="why-feature-icon">🔄</div>
+            <div>
+              <h4>Free Revisions</h4>
+              <p>We refine and adjust until you are 100% satisfied with the final result. No hidden charges.</p>
+            </div>
+          </div>
+          <div class="why-feature">
+            <div class="why-feature-icon">💰</div>
+            <div>
+              <h4>Affordable Pricing</h4>
+              <p>Competitive pricing designed for students, startups, and growing businesses in Pakistan.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="why-visual fade-in">
+        <div class="why-stat-card">
+          <div class="num">10+</div>
+          <div class="lbl">Projects Delivered</div>
+        </div>
+        <div class="why-stat-card">
+          <div class="num">3</div>
+          <div class="lbl">CS Experts</div>
+        </div>
+        <div class="why-stat-card">
+          <div class="num">100%</div>
+          <div class="lbl">Satisfaction Rate</div>
+        </div>
+        <div class="why-stat-card">
+          <div class="num">5★</div>
+          <div class="lbl">Avg. Rating</div>
+        </div>
+        <div class="why-stat-card" style="grid-column: 1/-1;">
+          <div class="num" style="font-size:1.4rem;">Badin, Sindh 🇵🇰</div>
+          <div class="lbl">Available Worldwide · Remote Friendly</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     TECH STACK
+══════════════════════════════════════ -->
+<section id="tech">
+  <div class="container">
+    <div class="section-header center fade-in">
+      <div class="section-label"><i class="fas fa-code"></i> Tech Stack</div>
+      <h2 class="section-title">Technologies We Master</h2>
+      <p class="section-sub">We work with the latest and most in-demand technologies to build fast, scalable, and modern software.</p>
+    </div>
+    <div class="tech-grid fade-in">
+      <div class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"/> React</div>
+      <div class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"/> Next.js</div>
+      <div class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"/> Python</div>
+      <div class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg"/> FastAPI</div>
+      <div class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"/> Node.js</div>
+      <div class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"/> JavaScript</div>
+      <div class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"/> TypeScript</div>
+      <div class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg"/> Flutter</div>
+      <div class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg"/> TensorFlow</div>
+      <div class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg"/> PyTorch</div>
+      <div class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg"/> OpenCV</div>
+      <div class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"/> MongoDB</div>
+      <div class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"/> MySQL</div>
+      <div class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"/> Docker</div>
+      <div class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"/> GitHub</div>
+      <div class="tech-pill">🤖 YOLO</div>
+      <div class="tech-pill">⚡ Tailwind CSS</div>
+      <div class="tech-pill">🔐 JWT Auth</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     PROJECTS
+══════════════════════════════════════ -->
+<section id="projects">
+  <div class="container">
+    <div class="section-header center fade-in">
+      <div class="section-label"><i class="fas fa-folder-open"></i> Our Work</div>
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-sub">A glimpse of what we've built — from AI systems to full-stack web platforms.</p>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card fade-in">
+        <div class="project-banner" style="background:linear-gradient(135deg,#1e3a8a,#2563eb);">🛍️</div>
+        <div class="project-body">
+          <h3>E-Commerce Platform</h3>
+          <p>Full-stack online store with product management, cart, checkout, JWT auth, and admin dashboard.</p>
+          <div class="project-tags">
+            <span class="project-tag">React</span>
+            <span class="project-tag">FastAPI</span>
+            <span class="project-tag">SQLite</span>
+            <span class="project-tag">JWT</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-banner" style="background:linear-gradient(135deg,#065f46,#059669);">👁️</div>
+        <div class="project-body">
+          <h3>Virtual Eye App</h3>
+          <p>Accessibility app for visually impaired users — real-time object detection and audio feedback using YOLO.</p>
+          <div class="project-tags">
+            <span class="project-tag">React Native</span>
+            <span class="project-tag">YOLO</span>
+            <span class="project-tag">Computer Vision</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-banner" style="background:linear-gradient(135deg,#4c1d95,#7c3aed);">🔍</div>
+        <div class="project-body">
+          <h3>Media Authenticity Detector</h3>
+          <p>AI-powered deepfake and media manipulation detection system built with deep learning and FastAPI.</p>
+          <div class="project-tags">
+            <span class="project-tag">Deep Learning</span>
+            <span class="project-tag">FastAPI</span>
+            <span class="project-tag">Python</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-banner" style="background:linear-gradient(135deg,#92400e,#f59e0b);">🎯</div>
+        <div class="project-body">
+          <h3>Career Recommendation System</h3>
+          <p>ML-powered system that recommends career paths based on student skills, interests, and academic performance.</p>
+          <div class="project-tags">
+            <span class="project-tag">Machine Learning</span>
+            <span class="project-tag">Python</span>
+            <span class="project-tag">React</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     PRICING
+══════════════════════════════════════ -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-header center fade-in">
+      <div class="section-label"><i class="fas fa-tag"></i> Pricing</div>
+      <h2 class="section-title">Simple, Transparent Pricing</h2>
+      <p class="section-sub">No hidden fees. Affordable rates for students, startups, and businesses. Custom quotes available.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <div class="pricing-card fade-in">
+        <div class="pricing-icon">🌐</div>
+        <h3>Starter Website</h3>
+        <p class="pricing-desc">Perfect for individuals and small businesses needing an online presence.</p>
+        <div class="pricing-price">Rs. 5,000 <span>/ project</span></div>
+        <ul class="pricing-features">
+          <li><i class="fas fa-check-circle"></i> Up to 5 pages</li>
+          <li><i class="fas fa-check-circle"></i> Responsive design</li>
+          <li><i class="fas fa-check-circle"></i> Contact form</li>
+          <li><i class="fas fa-check-circle"></i> Free hosting setup</li>
+          <li><i class="fas fa-check-circle"></i> 2 revisions</li>
+        </ul>
+        <a href="#contact" class="pricing-btn">Get Started</a>
+      </div>
+
+      <div class="pricing-card featured fade-in">
+        <div class="pricing-badge">⭐ Most Popular</div>
+        <div class="pricing-icon">🚀</div>
+        <h3>Full-Stack Web App</h3>
+        <p class="pricing-desc">Complete web application with backend, database, auth, and admin panel.</p>
+        <div class="pricing-price">Rs. 15,000 <span>/ project</span></div>
+        <ul class="pricing-features">
+          <li><i class="fas fa-check-circle"></i> Full frontend + backend</li>
+          <li><i class="fas fa-check-circle"></i> Database integration</li>
+          <li><i class="fas fa-check-circle"></i> User authentication</li>
+          <li><i class="fas fa-check-circle"></i> Admin dashboard</li>
+          <li><i class="fas fa-check-circle"></i> Deployment included</li>
+          <li><i class="fas fa-check-circle"></i> Unlimited revisions</li>
+        </ul>
+        <a href="#contact" class="pricing-btn">Get Started</a>
+      </div>
+
+      <div class="pricing-card fade-in">
+        <div class="pricing-icon">🎓</div>
+        <h3>Final Year Project</h3>
+        <p class="pricing-desc">Complete FYP with documentation, presentation, and full deployment support.</p>
+        <div class="pricing-price">Rs. 10,000 <span>/ project</span></div>
+        <ul class="pricing-features">
+          <li><i class="fas fa-check-circle"></i> Any tech stack</li>
+          <li><i class="fas fa-check-circle"></i> Full source code</li>
+          <li><i class="fas fa-check-circle"></i> Documentation</li>
+          <li><i class="fas fa-check-circle"></i> Presentation support</li>
+          <li><i class="fas fa-check-circle"></i> Viva preparation help</li>
+        </ul>
+        <a href="#contact" class="pricing-btn">Get Started</a>
+      </div>
+
+    </div>
+    <p style="text-align:center;margin-top:24px;font-size:0.875rem;color:#94a3b8;">
+      💡 Prices are starting estimates — <a href="#contact" style="color:var(--blue);font-weight:600;">contact us</a> for a custom quote based on your requirements.
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CONTACT
+══════════════════════════════════════ -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-wrapper">
+      <div class="fade-in">
+        <div class="section-label"><i class="fas fa-envelope"></i> Contact Us</div>
+        <h2>Let's Build Something<br/>Great Together</h2>
+        <p>Have a project in mind? Need a final year project? Want a website? We'd love to hear from you. Reach out on any platform below.</p>
+
+        <div class="contact-methods">
+          <a href="mailto:codemind.solution@gmail.com" class="contact-method">
+            <div class="contact-method-icon" style="background:#fef2f2;">📧</div>
+            <div class="contact-method-info">
+              <div class="label">Email</div>
+              <div class="value">codemind.solution@gmail.com</div>
+            </div>
+          </a>
+          <a href="https://wa.me/923001234567" class="contact-method">
+            <div class="contact-method-icon" style="background:#f0fdf4;">💬</div>
+            <div class="contact-method-info">
+              <div class="label">WhatsApp</div>
+              <div class="value">+92 300 1234567</div>
+            </div>
+          </a>
+          <a href="#" class="contact-method">
+            <div class="contact-method-icon" style="background:#eff6ff;">📍</div>
+            <div class="contact-method-info">
+              <div class="label">Location</div>
+              <div class="value">Badin, Sindh, Pakistan · Remote Worldwide</div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Social Links -->
+        <div class="social-links">
+          <a href="#" class="social-link linkedin"><i class="fab fa-linkedin"></i> LinkedIn</a>
+          <a href="#" class="social-link facebook"><i class="fab fa-facebook"></i> Facebook</a>
+          <a href="#" class="social-link fiverr"><i class="fas fa-leaf"></i> Fiverr</a>
+          <a href="#" class="social-link upwork"><i class="fas fa-briefcase"></i> Upwork</a>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="contact-form fade-in">
+        <h3>📩 Send Us a Message</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" placeholder="e.g. Ahmed Ali"/>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="you@example.com"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Service Needed</label>
+          <select>
+            <option value="">Select a service...</option>
+            <option>Website Development</option>
+            <option>Android / iOS App</option>
+            <option>Desktop Application</option>
+            <option>Final Year Project</option>
+            <option>AI / ML System</option>
+            <option>Software Installation</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Budget (Rs.)</label>
+          <input type="text" placeholder="e.g. Rs. 10,000 – 15,000"/>
+        </div>
+        <div class="form-group">
+          <label>Project Details</label>
+          <textarea placeholder="Tell us about your project — what you need, timeline, any specific requirements..."></textarea>
+        </div>
+        <button class="form-submit" onclick="handleSubmit(this)">
+          <i class="fas fa-paper-plane"></i> Send Message
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-icon"><i class="fas fa-brain"></i></div>
+          <span>CodeMind Solution</span>
+        </div>
+        <p>Building intelligent digital experiences. Web, mobile, desktop, AI systems, and final year projects — done right.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="#services">Website Development</a>
+        <a href="#services">App Development</a>
+        <a href="#services">Final Year Projects</a>
+        <a href="#services">Software Installation</a>
+        <a href="#services">AI / ML Systems</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#why">Why Choose Us</a>
+        <a href="#projects">Our Projects</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Find Us</h4>
+        <a href="#">LinkedIn</a>
+        <a href="#">Facebook</a>
+        <a href="#">Fiverr</a>
+        <a href="#">Upwork</a>
+        <a href="#">GitHub</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 CodeMind Solution · Badin, Sindh, Pakistan</span>
+      <span>Made with ❤️ by 3 passionate developers 🚀</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to Top -->
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
+  <i class="fas fa-chevron-up"></i>
+</button>
+
+<!-- ══════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════ -->
+<script>
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20)
+    document.getElementById('back-top').classList.toggle('show', window.scrollY > 400)
+  })
+
+  // Mobile menu
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('open')
+  })
+  function closeMobile() {
+    document.getElementById('mobile-menu').classList.remove('open')
+  }
+
+  // Scroll fade-in animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80)
+        observer.unobserve(entry.target)
+      }
+    })
+  }, { threshold: 0.1 })
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el))
+
+  // Form submit
+  function handleSubmit(btn) {
+    btn.innerHTML = '<i class="fas fa-check"></i> Message Sent!'
+    btn.style.background = '#16a34a'
+    setTimeout(() => {
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message'
+      btn.style.background = ''
+    }, 3000)
+  }
+
+  // Active nav link highlight on scroll
+  const sections = document.querySelectorAll('section[id]')
+  window.addEventListener('scroll', () => {
+    let current = ''
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.getAttribute('id')
+    })
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.style.color = a.getAttribute('href') === `#${current}` ? '#2563eb' : ''
+    })
+  })
+</script>
+
+</body>
+</html>
