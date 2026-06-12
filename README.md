@@ -122,10 +122,7 @@ We'd love to work with you! Reach out on any platform:
 
 <div align="center">
 
-[
-[
-[
-[
+
 
 📍 Badin, Sindh, Pakistan &nbsp;|&nbsp; 🌐 Available Worldwide (Remote)
 
